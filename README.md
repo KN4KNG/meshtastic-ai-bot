@@ -1,9 +1,6 @@
-# meshtastic-ai-bot
-This repository contains a script for a Meshtastic AI Bot that uses the Groq API to generate responses to received messages.
-
 # Meshtastic AI Bot
 
-This repository contains a script for a Meshtastic AI Bot that uses the Groq API to generate responses to received messages.
+This repository contains a script for a Meshtastic AI Bot that uses the Groq API to generate responses to received messages to a Meshtastic channel using a computer and usb (Serial Interface) to a Meshtastic Node.
 
 ## Requirements
 
