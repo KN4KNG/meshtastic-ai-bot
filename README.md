@@ -27,10 +27,10 @@ This repository contains a script for a Meshtastic AI Bot that uses the Groq API
 ## Usage
 
 Run the script:
+   ```bash
+   pip install meshtastic pubsub groq
+   ```
 
-  ```python
-  python meshtastic_ai_bot.py
-  ```
 The bot will listen for incoming messages and respond using the Groq API.
 
 ## License
