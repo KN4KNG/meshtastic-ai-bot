@@ -6,7 +6,7 @@ from groq.types.chat import ChatCompletionUserMessageParam, ChatCompletionSystem
 import math
 
 # Replace with your Groq API key
-API_KEY = 'YOUR_API_KEY_HERE'
+API_KEY = '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'
 
 # Initialize the Groq client
 client = Groq(api_key=API_KEY)
@@ -40,8 +40,9 @@ def get_ai_response(message):
                 {"role": "user", "content": message}
             ],
             model="mixtral-8x7b-32768",
-            max_tokens=50,
-            temperature=0.7
+            max_tokens=150,  # Adjust the max_tokens value to change respons sizes
+            temperature=0.7,
+            stop=["\n"]  # Add a stop parameter to end responses at logical points
         )
         response_text = chat_completion.choices[0].message.content.strip()
         return response_text
@@ -51,13 +52,29 @@ def get_ai_response(message):
 
 def send_message_in_chunks(message):
     try:
+        words = message.split()
         total_chunks = math.ceil(len(message) / 220)
-        for i in range(total_chunks):
-            chunk = message[i*220:(i+1)*220]
-            msgcount = str(i + 1) + "/" + str(total_chunks) + " "
-            interface.sendText(msgcount + chunk, channelIndex=CHANNEL_ID)
-            print(f"Sent on channel {CHANNEL_ID}: {msgcount + chunk}")
-            time.sleep(1)  # Add a short delay to avoid overwhelming the interface
+        chunk = ""
+        chunk_count = 1
+
+        for word in words:
+            if len(chunk) + len(word) + 1 > 220:
+                msgcount = f" ({chunk_count}/{total_chunks})"
+                interface.sendText(chunk + msgcount, channelIndex=CHANNEL_ID)
+                print(f"Sent on channel {CHANNEL_ID}: {chunk + msgcount}")
+                time.sleep(3)  # Add a short delay to avoid overwhelming the interface
+                chunk = word
+                chunk_count += 1
+            else:
+                if chunk:
+                    chunk += " " + word
+                else:
+                    chunk = word
+
+        if chunk:
+            msgcount = f" ({chunk_count}/{total_chunks})"
+            interface.sendText(chunk + msgcount, channelIndex=CHANNEL_ID)
+            print(f"Sent on channel {CHANNEL_ID}: {chunk + msgcount}")
     except Exception as e:
         print(f"Error sending message: {e}")
 
