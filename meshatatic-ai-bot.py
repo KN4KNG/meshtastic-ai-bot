@@ -6,7 +6,7 @@ from groq.types.chat import ChatCompletionUserMessageParam, ChatCompletionSystem
 import math
 
 # Replace with your Groq API key
-API_KEY = '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'
+API_KEY = 'YOUR_API_KEY_HERE'
 
 # Initialize the Groq client
 client = Groq(api_key=API_KEY)
