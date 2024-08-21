@@ -24,11 +24,13 @@ This repository contains a script for a Meshtastic AI Bot that uses the Groq API
 
 3. Replace the placeholder API key in the script with your actual Groq API key.
 
+4. Set the Channel Number to Operate on. (Direct Messages not supported yet.)
+
 ## Usage
 
 Run the script:
    ```bash
-   pip install meshtastic pubsub groq
+   python meshtastic-ai-bot.py
    ```
 
 The bot will listen for incoming messages and respond using the Groq API.
